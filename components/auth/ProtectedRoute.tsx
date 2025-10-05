@@ -1,10 +1,10 @@
-// components/auth/ProtectedRoute.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Navbar } from "../layout/Navbar";
 import { Footer } from "../layout/Footer";
+import { Sidebar } from "../layout/Sidebar";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -19,13 +19,30 @@ export function ProtectedRoute({ children, role }: ProtectedRouteProps) {
     const token = localStorage.getItem("worksync_jwt");
     const userRole = localStorage.getItem("worksync_role");
 
+    // 🧩 1️⃣ No token → redirect to login
     if (!token) {
       router.replace("/login");
-    } else if (role && userRole !== role) {
-      router.replace("/dashboard");
-    } else {
-      setIsChecking(false);
+      return;
     }
+
+    // 🧩 2️⃣ Role-based access
+    if (role === "admin") {
+      // only admins should see admin routes
+      if (userRole !== "admin") {
+        router.replace("/dashboard");
+        return;
+      }
+    } else if (role === "user") {
+      // users can see user routes only
+      if (userRole !== "user" && userRole !== "admin") {
+        // e.g. if role is unknown
+        router.replace("/login");
+        return;
+      }
+    }
+
+    // 🧩 3️⃣ If all checks pass
+    setIsChecking(false);
   }, [router, role]);
 
   if (isChecking) {
@@ -38,8 +55,14 @@ export function ProtectedRoute({ children, role }: ProtectedRouteProps) {
 
   return (
     <>
-      <Navbar /> {children}
-      <Footer />
+      <Navbar />
+      <div className="flex">
+        <Sidebar />
+        <div className="w-full">
+          <main className="">{children}</main>
+          <Footer />
+        </div>
+      </div>
     </>
   );
 }

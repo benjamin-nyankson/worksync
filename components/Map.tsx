@@ -22,7 +22,7 @@ const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), {
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { appName } from "@/app/page";
+import { appName } from "@/constants/constant";
 
 // Custom marker icon (fixes broken default icons in Next.js)
 const icon = L.icon({

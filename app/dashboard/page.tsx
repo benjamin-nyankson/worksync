@@ -5,7 +5,7 @@ import { getLeavesColumns } from "@/components/TableColumns";
 import { Button } from "@/components/ui/Button";
 import { DataTable } from "@/components/ui/DataTable";
 import { Leave, User } from "@/interface/interface";
-import { useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 
 import { LeaveForm } from "@/components/leave/LeaveForm";
 import { Modal } from "@/components/ui/Modal";
@@ -24,12 +24,14 @@ export default function DashboardPage() {
     isSuccess: updateSuccess,
     isPending: updateLoading,
   } = useUpdateLeave();
-  const user: User = JSON.parse(localStorage.getItem("user_data") ?? "[]");
+
+  let user: User;
 
   // Simulate fetching data from API
   useEffect(() => {
     const storedName = localStorage.getItem("worksync_name");
     if (storedName) setUserName(storedName);
+    user = JSON.parse(localStorage.getItem("user_data") ?? "[]");
   }, []);
 
   const leaves: Leave[] = useMemo(() => {
@@ -105,18 +107,18 @@ export default function DashboardPage() {
 
         {/* Stats Section */}
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="p-6 rounded-xl shadow bg-background border border-foreground/10">
+          <StatsCard>
             <h3 className="text-sm text-foreground/70">Total Leaves</h3>
             <p className="text-2xl font-bold text-primary">{totalLeaves}</p>
-          </div>
-          <div className="p-6 rounded-xl shadow bg-background border border-foreground/10">
+          </StatsCard>
+          <StatsCard>
             <h3 className="text-sm text-foreground/70">Approved</h3>
             <p className="text-2xl font-bold text-green-600">{approved}</p>
-          </div>
-          <div className="p-6 rounded-xl shadow bg-background border border-foreground/10">
+          </StatsCard>
+          <StatsCard>
             <h3 className="text-sm text-foreground/70">Pending</h3>
             <p className="text-2xl font-bold text-yellow-500">{pending}</p>
-          </div>
+          </StatsCard>
         </section>
 
         {/* Recent Leaves Section */}
@@ -155,3 +157,11 @@ export default function DashboardPage() {
     </ProtectedRoute>
   );
 }
+
+const StatsCard = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className="p-6 rounded-xl bg-background border border-foreground/10">
+      {children}
+    </div>
+  );
+};

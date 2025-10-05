@@ -36,7 +36,6 @@ export default function LandingPage() {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: ['easeOut'],
       },
     },
   };
@@ -158,5 +157,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
-export const appName = "TimeEase";

@@ -6,8 +6,7 @@ import { User } from "@/interface/interface";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { quickLinks } from "./Footer";
-import path from "path";
-import { appName } from "@/app/page";
+import { appName } from "@/constants/constant";
 
 export function Navbar() {
   const [user, setUser] = useState<User | null>(null);

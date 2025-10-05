@@ -1,6 +1,6 @@
 "use client";
 
-import { appName } from "@/app/page";
+import { appName } from "@/constants/constant";
 import Link from "next/link";
 
 export function Footer() {

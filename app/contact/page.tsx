@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { UnprotectedLayout } from "@/components/layout/UnprotectedLayout";
 // import { Map } from "@/components/Map";
 import dynamic from "next/dynamic";
-import { appName } from "../page";
+import { appName } from "@/constants/constant";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });

@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { appName } from "../page";
+import { appName } from "@/constants/constant";
 
 export default function AboutPage() {
   const containerVariants = {

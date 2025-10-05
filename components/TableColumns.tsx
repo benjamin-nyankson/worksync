@@ -13,25 +13,25 @@ export const getLeavesColumns = (
   {
     key: "leaveType",
     label: "Type",
-    render: (value) => <span className="capitalize">{value}</span>,
+    render: (_, row) => <span className="capitalize">{row.leaveType}</span>,
   },
   { key: "startDate", label: "From" },
   { key: "endDate", label: "To" },
   {
     key: "status",
     label: "Status",
-    render: (value) => (
+    render: (_, row) => (
       <span
         className={`px-2 py-1 rounded text-xs font-medium
           ${
-            value === "Approved"
+            row.status === "Approved"
               ? "bg-green-100 text-green-700"
-              : value === "Pending"
+              : row.status === "Pending"
               ? "bg-yellow-100 text-yellow-700"
               : "bg-red-100 text-red-700"
           }`}
       >
-        {value}
+        {row.status}
       </span>
     ),
   },

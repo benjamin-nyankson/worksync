@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { UnprotectedLayout } from "@/components/layout/UnprotectedLayout";
 import { motion } from "framer-motion";
-import { appName } from "../page";
+import { appName } from "@/constants/constant";
 
 export default function FeaturesPage() {
   const features = [
@@ -83,7 +83,7 @@ export default function FeaturesPage() {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        // ease: "Easing",
       },
     },
   };

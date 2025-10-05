@@ -1,6 +1,6 @@
 "use client";
 
-import { appName } from "@/app/page";
+import { appName } from "@/constants/constant";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
