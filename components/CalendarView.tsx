@@ -1,12 +1,13 @@
 "use client";
 
-import FullCalendar from "@fullcalendar/react";
+import { Leave } from "@/interface/interface";
+import { EventSourceInput } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { EventSourceInput } from "@fullcalendar/core";
+import FullCalendar from "@fullcalendar/react";
 import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
-import { Leave } from "@/interface/interface";
+
 
 export function CalendarView({
   events,
@@ -22,10 +23,11 @@ export function CalendarView({
         Calendar View
       </h2>
       <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]}
+        plugins={[dayGridPlugin, interactionPlugin,]}
         initialView="dayGridMonth"
         events={events}
         eventClassNames="rounded-lg shadow-sm my-2 p-2 cursor-pointer"
+        weekends={false}
         eventDidMount={(info) => {
           const leave: Leave = info.event.extendedProps as Leave;
           tippy(info.el, {
