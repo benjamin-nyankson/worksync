@@ -17,6 +17,8 @@ export function LeaveDetails({
   handleValidate,
   loading,
 }: LeaveDetailsProps) {
+  const [comment, setComment] = useState("");
+  const [status, setStatus] = useState<LeaveStatus>("Pending");
   if (!leave)
     return (
       <div className="p-6 text-center text-foreground/60">
@@ -30,9 +32,6 @@ export function LeaveDetails({
       : leave.status === "Pending"
       ? "text-yellow-600 bg-yellow-100"
       : "text-red-600 bg-red-100";
-
-  const [comment, setComment] = useState("");
-  const [status, setStatus] = useState<LeaveStatus>(leave.status || "Pending");
 
   const validateLeave = (status: LeaveStatus) => {
     setStatus(status);
