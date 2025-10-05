@@ -1,35 +1,49 @@
 import { NextResponse } from "next/server";
 import { mockLeaves } from "@/lib/mockDb";
+import type { Leave } from "@/interface/interface";
 
-type Params = { params: { id: string } };
-
-export async function PATCH(req: Request, { params }: Params) {
-  const { id } = params;
-  const body = await req.json();
-
-  const leaveIndex = mockLeaves.findIndex((l) => l.id === id);
-  if (leaveIndex === -1) {
+// ✅ Correct: context contains params synchronously
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const leave = mockLeaves.find((l) => l.id === params.id);
+  if (!leave) {
     return NextResponse.json({ error: "Leave not found" }, { status: 404 });
   }
-
-  // merge updates into existing leave
-  mockLeaves[leaveIndex] = {
-    ...mockLeaves[leaveIndex],
-    ...body,
-  };
-
-  return NextResponse.json(mockLeaves[leaveIndex]);
+  return NextResponse.json(leave);
 }
 
-
-export async function DELETE(_: Request, { params }: Params) {
+// ✅ Update or patch a leave request
+export async function PATCH(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   const { id } = params;
+  const body = await request.json();
 
-  const leaveIndex = mockLeaves.findIndex((l) => l.id === id);
-  if (leaveIndex === -1) {
+  const index = mockLeaves.findIndex((l) => l.id === id);
+  if (index === -1) {
     return NextResponse.json({ error: "Leave not found" }, { status: 404 });
   }
 
-  const deleted = mockLeaves.splice(leaveIndex, 1)[0];
-  return NextResponse.json({ message: "Leave deleted", deleted });
+  mockLeaves[index] = { ...mockLeaves[index], ...body };
+
+  return NextResponse.json(mockLeaves[index]);
+}
+
+// ✅ Delete a leave
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const { id } = params;
+
+  const index = mockLeaves.findIndex((l) => l.id === id);
+  if (index === -1) {
+    return NextResponse.json({ error: "Leave not found" }, { status: 404 });
+  }
+
+  const deleted = mockLeaves.splice(index, 1)[0];
+  return NextResponse.json(deleted);
 }
