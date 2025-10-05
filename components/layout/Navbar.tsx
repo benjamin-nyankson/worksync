@@ -3,10 +3,11 @@
 import { Button } from "@/components/ui/Button";
 import { appName } from "@/constants/constant";
 import { User } from "@/interface/interface";
-import { EllipsisIcon, LayoutDashboard, LogOut } from "lucide-react";
+import { LayoutDashboard, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Dropdown } from "../ui/Dropdown";
 import { quickLinks } from "./Footer";
 
@@ -76,10 +77,13 @@ export function Navbar() {
               </span>
               <Dropdown
                 trigger={
-                  <EllipsisIcon
-                    className="rotate-90 cursor-pointer"
-                    size={20}
-                  />
+                  <Avatar className="cursor-pointer">
+                    {/* <AvatarImage src="" /> */}
+                    <AvatarFallback>
+                      {user?.name?.split(" ")[0][0]}
+                      {user?.name?.split(" ")[1][0]}
+                    </AvatarFallback>
+                  </Avatar>
                 }
                 label=""
                 items={[

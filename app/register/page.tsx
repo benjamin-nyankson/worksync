@@ -59,18 +59,21 @@ export default function RegisterPage() {
           label="Name"
           error={errors.name?.message}
           {...register("name")}
+          placeholder="John Doe"
         />
         <InputField
           label="Email"
           type="email"
           error={errors.email?.message}
           {...register("email")}
+          placeholder="Email"
         />
         <InputField
           label="Password"
           type="password"
           error={errors.password?.message}
           {...register("password")}
+          placeholder="******"
         />
         <Button
           type="submit"

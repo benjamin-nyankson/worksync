@@ -39,7 +39,7 @@ export default function LoginPage() {
         apiKey: string;
         token: string;
         role: string;
-        user:User
+        user: User;
       }>("/api/auth/login", {
         method: "POST",
         body: JSON.stringify(data),
@@ -50,6 +50,7 @@ export default function LoginPage() {
       localStorage.setItem("worksync_role", res.role);
       localStorage.setItem("user_data", JSON.stringify(res.user));
       router.push(res.role === "admin" ? "/admin" : "/dashboard");
+      toast.success("Login successful");
     } catch {
       toast.error("Invalid credentials");
     }
@@ -64,12 +65,14 @@ export default function LoginPage() {
           type="email"
           error={errors.email?.message}
           {...register("email")}
+          placeholder="Email"
         />
         <InputField
           label="Password"
           type="password"
           error={errors.password?.message}
           {...register("password")}
+          placeholder="******"
         />
         <Button
           type="submit"
