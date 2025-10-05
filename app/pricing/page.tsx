@@ -81,7 +81,7 @@ export default function PricingPage() {
   return (
     <UnprotectedLayout>
       <motion.section
-        className="min-h-screen bg-background text-foreground py-20 "
+        className="min-h-screen bg-background text-foreground py-20 px-6 "
         initial="hidden"
         animate="visible"
         variants={containerVariants}

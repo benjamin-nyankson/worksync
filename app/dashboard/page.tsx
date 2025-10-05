@@ -50,7 +50,6 @@ export default function DashboardPage() {
   const pending = leaves.filter((l) => l.status === "Pending").length;
 
   const handleEdit = (leave: Leave) => {
-    console.log("Edit leave:", leave);
     setOpenDialog(true);
     setLeave(leave);
   };
@@ -83,9 +82,7 @@ export default function DashboardPage() {
   }, [isSuccess, updateSuccess]);
 
   const handleAddLeave = (leave: Leave) => {
-    console.log(leave);
     if (leave.id) {
-      console.log("updating");
       updateLeave({ ...leave, userId: user?.id });
     } else {
       mutate({ ...leave, userId: user?.id });

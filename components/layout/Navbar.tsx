@@ -1,12 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { User } from "@/interface/interface";
-import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { quickLinks } from "./Footer";
 import { appName } from "@/constants/constant";
+import { User } from "@/interface/interface";
+import { EllipsisIcon, LayoutDashboard, LogOut } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Dropdown } from "../ui/Dropdown";
+import { quickLinks } from "./Footer";
 
 export function Navbar() {
   const [user, setUser] = useState<User | null>(null);
@@ -32,7 +34,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="bg-background border-b border-foreground/10">
+    <header className="bg-background border-b border-foreground/10 px-6">
       <div className=" py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-primary">
@@ -72,6 +74,27 @@ export function Navbar() {
               <span className="text-sm text-foreground/80">
                 Hi, {user.name}
               </span>
+              <Dropdown
+                trigger={
+                  <EllipsisIcon
+                    className="rotate-90 cursor-pointer"
+                    size={20}
+                  />
+                }
+                label=""
+                items={[
+                  {
+                    label: "Dashboard",
+                    icon: <LayoutDashboard className="h-4 w-4" />,
+                    onClick: () => router.push("/dashboard"),
+                  },
+                  {
+                    label: "Logout",
+                    icon: <LogOut className="h-4 w-4" />,
+                    onClick: () => handleLogout(),
+                  },
+                ]}
+              />
               <Button variant="outline" size="sm" onClick={handleLogout}>
                 Logout
               </Button>
