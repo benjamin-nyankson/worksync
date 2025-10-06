@@ -99,9 +99,6 @@ export function Navbar() {
                   },
                 ]}
               />
-              <Button variant="outline" size="sm" onClick={handleLogout}>
-                Logout
-              </Button>
             </>
           ) : (
             <>
