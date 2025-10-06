@@ -7,6 +7,7 @@ export function useLeaves() {
   return useQuery<Leave[]>({
     queryKey: ["leaves"],
     queryFn: () => fetcher<Leave[]>("/api/leaves"),
+    staleTime: 1000 * 60 * 5, 
   });
 }
 
