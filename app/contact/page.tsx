@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { UnprotectedLayout } from "@/components/layout/UnprotectedLayout";
 // import { Map } from "@/components/Map";
 import dynamic from "next/dynamic";
-import { appName } from "@/constants/constant";
+import { APP_NAME } from "@/constants/constant";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -57,7 +57,7 @@ export default function ContactPage() {
           className="text-center py-20 px-6 bg-gradient-to-b from-primary/10 via-background to-background"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Get in Touch with <span className="text-primary">{appName}</span>
+            Get in Touch with <span className="text-primary">{APP_NAME}</span>
           </h1>
           <p className="text-foreground/70 max-w-2xl mx-auto text-lg">
             Have questions, feedback, or partnership ideas? We’d love to hear
@@ -84,7 +84,9 @@ export default function ContactPage() {
                 <Mail className="text-primary h-6 w-6" />
                 <div>
                   <p className="text-sm text-foreground/70">Email</p>
-                  <p className="font-medium lowercase">support@{appName}.com</p>
+                  <p className="font-medium lowercase">
+                    support@{APP_NAME}.com
+                  </p>
                 </div>
               </div>
 
@@ -183,7 +185,7 @@ export default function ContactPage() {
         >
           <h2 className="text-3xl font-bold mb-4">Visit Our Office</h2>
           <p className="text-foreground/70 mb-10">
-            Come meet our team and learn more about how {appName} can help your
+            Come meet our team and learn more about how {APP_NAME} can help your
             business.
           </p>
           {/* Map Section */}
@@ -199,7 +201,7 @@ export default function ContactPage() {
             </h2>
             <p className="text-foreground/70 mb-10">
               We’re growing fast — here are a few of the cities where you can
-              find {appName} teams.
+              find {APP_NAME} teams.
             </p>
 
             <div className="max-w-5xl mx-auto">

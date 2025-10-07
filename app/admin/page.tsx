@@ -10,6 +10,7 @@ import { Leave, LeaveStatus } from "@/interface/interface";
 import { EventSourceInput } from "@fullcalendar/core";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
+import { StatsCard } from "../dashboard/page";
 
 export default function AdminPage() {
   const { data: leaves, isFetching: loading } = useLeaves();
@@ -27,24 +28,7 @@ export default function AdminPage() {
   const pending = leaves?.filter((l) => l.status === "Pending").length;
   const rejected = leaves?.filter((l) => l.status === "Rejected").length;
 
-  const events = useMemo(
-    () =>
-      leaves?.map((leave) => ({
-        id: leave.id,
-        title: `${leave.employeeName} - ${leave.leaveType}`,
-        start: leave.startDate,
-        end: leave.endDate,
-        backgroundColor:
-          leave.status === "Approved"
-            ? "var(--color-primary)"
-            : leave.status === "Pending"
-            ? "var(--color-secondary)"
-            : "#ef4444",
-        borderColor: "transparent",
-        extendedProps: leave,
-      })),
-    [leaves]
-  );
+  const { events } = useLeaveEvent(leaves || []);
 
   const handleValidate = (id: string, status: LeaveStatus, message: string) => {
     mutate({ id, status });
@@ -59,7 +43,7 @@ export default function AdminPage() {
   }, [isSuccess]);
 
   return (
-    <ProtectedRoute role="admin">
+    <ProtectedRoute role="Admin">
       <div className="p-6 space-y-10 bg-background text-foreground ">
         {/* Header */}
         <header className="flex items-center justify-between">
@@ -73,22 +57,22 @@ export default function AdminPage() {
 
         {/* Stats */}
         <section className="grid grid-cols-1 sm:grid-cols-4 gap-6">
-          <div className="p-5 rounded-xl border border-foreground/10 shadow bg-background">
+          <StatsCard>
             <h3 className="text-sm text-foreground/70">Total Requests</h3>
             <p className="text-2xl font-bold text-primary">{total}</p>
-          </div>
-          <div className="p-5 rounded-xl border border-foreground/10 shadow bg-background">
+          </StatsCard>
+          <StatsCard>
             <h3 className="text-sm text-foreground/70">Approved</h3>
             <p className="text-2xl font-bold text-green-600">{approved}</p>
-          </div>
-          <div className="p-5 rounded-xl border border-foreground/10 shadow bg-background">
+          </StatsCard>
+          <StatsCard>
             <h3 className="text-sm text-foreground/70">Pending</h3>
             <p className="text-2xl font-bold text-yellow-500">{pending}</p>
-          </div>
-          <div className="p-5 rounded-xl border border-foreground/10 shadow bg-background">
+          </StatsCard>
+          <StatsCard>
             <h3 className="text-sm text-foreground/70">Rejected</h3>
             <p className="text-2xl font-bold text-red-500">{rejected}</p>
-          </div>
+          </StatsCard>
         </section>
 
         {/* Data Table */}
@@ -115,3 +99,25 @@ export default function AdminPage() {
     </ProtectedRoute>
   );
 }
+
+export const useLeaveEvent = (leaves: Leave[]) => {
+  const events = useMemo(
+    () =>
+      leaves?.map((leave) => ({
+        id: leave.id,
+        start: leave.startDate,
+        end: leave.endDate,
+        backgroundColor:
+          leave.status === "Approved"
+            ? "var(--color-primary)"
+            : leave.status === "Pending"
+            ? "var(--color-secondary)"
+            : "#ef4444",
+        borderColor: "transparent",
+        extendedProps: leave,
+      })),
+    [leaves]
+  );
+
+  return { events };
+};

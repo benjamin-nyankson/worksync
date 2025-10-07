@@ -10,7 +10,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { appName } from "@/constants/constant";
+import { APP_NAME } from "@/constants/constant";
 
 /**
  * Sidebar navigation item definition
@@ -22,7 +22,7 @@ export function Sidebar() {
   const [role, setRole] = useState("");
 
   useEffect(() => {
-    const storedRole = localStorage.getItem("worksync_role");
+    const storedRole = localStorage.getItem("role");
     setRole(storedRole || "");
   });
 
@@ -51,7 +51,7 @@ export function Sidebar() {
       <div className="flex items-center justify-between p-4 border-b border-foreground/10">
         {!collapsed && (
           <span className="font-bold text-lg text-primary transition-all">
-            {appName}
+            {APP_NAME}
           </span>
         )}
         <button
@@ -99,7 +99,7 @@ export function Sidebar() {
       <div className="p-4 border-t border-foreground/10 text-xs text-foreground/60">
         {!collapsed && (
           <p>
-            © {new Date().getFullYear()} {appName}
+            © {new Date().getFullYear()} {APP_NAME}
           </p>
         )}
       </div>

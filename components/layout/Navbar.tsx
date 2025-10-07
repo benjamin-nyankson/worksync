@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { appName } from "@/constants/constant";
+import { APP_NAME } from "@/constants/constant";
 import { User } from "@/interface/interface";
 import { LayoutDashboard, LogOut } from "lucide-react";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Dropdown } from "../ui/Dropdown";
 import { quickLinks } from "./Footer";
+import { logoutUser } from "@/lib/auth";
 
 export function Navbar() {
   const [user, setUser] = useState<User | null>(null);
@@ -28,10 +29,11 @@ export function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("user_data");
-    localStorage.removeItem("worksync_jwt");
-    localStorage.removeItem("worksync_role");
-    router.push("/login");
+    // localStorage.removeItem("user_data");
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("role");
+    // router.push("/login");
+    logoutUser();
   };
 
   return (
@@ -39,7 +41,7 @@ export function Navbar() {
       <div className=" py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-primary">
-          {appName}
+          {APP_NAME}
         </Link>
 
         {/* Navigation */}
@@ -73,15 +75,14 @@ export function Navbar() {
           {user ? (
             <>
               <span className="text-sm text-foreground/80">
-                Hi, {user.name}
+                Hi, {user.username}
               </span>
               <Dropdown
                 trigger={
                   <Avatar className="cursor-pointer">
                     {/* <AvatarImage src="" /> */}
                     <AvatarFallback>
-                      {user?.name?.split(" ")[0][0]}
-                      {user?.name?.split(" ")[1][0]}
+                      {user?.username[0]?.toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                 }

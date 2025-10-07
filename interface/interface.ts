@@ -1,9 +1,9 @@
 export type User = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  role: "admin" | "user";
+  exp: number;
+  iat: number;
+  id: number;
+  role: "User" | "Admin";
+  username: string;
 };
 
 export type LeaveStatus = "Pending" | "Approved" | "Rejected";
@@ -11,10 +11,10 @@ export type Leave = {
   id: string;
   userId: string;
   employeeName?: string;
-  leaveType: string;
   startDate: string;
   endDate: string;
   status?: LeaveStatus;
-  noOfDays: number;
   reason: string;
+  end_date?:string;
+  start_date?:string;
 };

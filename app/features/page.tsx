@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { UnprotectedLayout } from "@/components/layout/UnprotectedLayout";
 import { motion } from "framer-motion";
-import { appName } from "@/constants/constant";
+import { APP_NAME } from "@/constants/constant";
 
 export default function FeaturesPage() {
   const features = [
@@ -33,7 +33,8 @@ export default function FeaturesPage() {
       icon: <Clock className="h-6 w-6 text-primary" />,
       title: "Automated Tracking",
       description:
-        appName + " keeps an accurate record of all leave types, durations, and approvals — no spreadsheets needed.",
+        APP_NAME +
+        " keeps an accurate record of all leave types, durations, and approvals — no spreadsheets needed.",
     },
     {
       icon: <BarChart3 className="h-6 w-6 text-primary" />,
@@ -108,7 +109,7 @@ export default function FeaturesPage() {
             className="text-foreground/70 max-w-2xl mx-auto mb-8 text-lg"
             variants={itemVariants}
           >
-            {appName} makes managing employee leaves simple, transparent, and
+            {APP_NAME} makes managing employee leaves simple, transparent, and
             efficient — saving your team time and keeping everyone in sync.
           </motion.p>
           <motion.div variants={itemVariants}>
@@ -159,12 +160,12 @@ export default function FeaturesPage() {
               Start Simplifying Your Leave Management Today
             </h2>
             <p className="text-foreground/70 mb-8 max-w-2xl mx-auto">
-              Join teams already using {appName} to streamline workflows and
+              Join teams already using {APP_NAME} to streamline workflows and
               improve transparency.
             </p>
             <Link href="/register">
-              <Button variant="primary" size="lg" className="rounded-full px-8">
-                Try {appName} Free
+              <Button variant="primary" size="lg" className="px-8">
+                Try {APP_NAME} Free
               </Button>
             </Link>
           </div>
@@ -184,7 +185,7 @@ export default function FeaturesPage() {
             </h3>
             <p className="text-foreground/70 max-w-3xl mx-auto mb-8">
               From automated leave tracking to role-based permissions and
-              real-time analytics, {appName} helps your team stay organized,
+              real-time analytics, {APP_NAME} helps your team stay organized,
               productive, and happy.
             </p>
             <motion.div

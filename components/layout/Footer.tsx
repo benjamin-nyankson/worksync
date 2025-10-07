@@ -1,6 +1,6 @@
 "use client";
 
-import { appName } from "@/constants/constant";
+import { APP_NAME } from "@/constants/constant";
 import Link from "next/link";
 
 export function Footer() {
@@ -9,7 +9,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
         {/* Brand */}
         <div>
-          <h3 className="text-lg font-bold text-primary">{appName}</h3>
+          <h3 className="text-lg font-bold text-primary">{APP_NAME}</h3>
           <p className="mt-2 text-sm">
             Simplifying leave management for teams.
           </p>
@@ -34,7 +34,7 @@ export function Footer() {
           <h4 className="font-semibold mb-2">Contact</h4>
           <ul className="space-y-1 text-sm">
             <li>
-              Email: <span className="lowercase">support@{appName}.com</span>
+              Email: <span className="lowercase">support@{APP_NAME}.com</span>
             </li>
             <li>Phone: +1 (555) 123-4567</li>
           </ul>
@@ -42,7 +42,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-foreground/10 text-center py-4 text-xs">
-        © {new Date().getFullYear()} {appName}. All rights reserved.
+        © {new Date().getFullYear()} {APP_NAME}. All rights reserved.
       </div>
     </footer>
   );

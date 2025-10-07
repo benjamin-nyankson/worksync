@@ -1,1 +1,1 @@
-export const appName = "TimeEase";
+export const APP_NAME = "WorkSync";

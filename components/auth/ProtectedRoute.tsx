@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { Navbar } from "../layout/Navbar";
 import { Footer } from "../layout/Footer";
 import { Sidebar } from "../layout/Sidebar";
+import { isTokenExpired, logoutUser, decodeToken } from "@/lib/auth";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  role?: "admin" | "user";
+  role?: "Admin" | "User";
 }
 
 export function ProtectedRoute({ children, role }: ProtectedRouteProps) {
@@ -16,32 +17,29 @@ export function ProtectedRoute({ children, role }: ProtectedRouteProps) {
   const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("worksync_jwt");
-    const userRole = localStorage.getItem("worksync_role");
+    const token = localStorage.getItem("token");
+    const userRole = localStorage.getItem("role");
 
-    // 🧩 1️⃣ No token → redirect to login
     if (!token) {
       router.replace("/login");
       return;
     }
 
-    // 🧩 2️⃣ Role-based access
-    if (role === "admin") {
-      // only admins should see admin routes
-      if (userRole !== "admin") {
-        router.replace("/dashboard");
-        return;
-      }
-    } else if (role === "user") {
-      // users can see user routes only
-      if (userRole !== "user" && userRole !== "admin") {
-        // e.g. if role is unknown
-        router.replace("/login");
-        return;
-      }
+    if (isTokenExpired(token)) {
+      logoutUser();
+      return;
     }
 
-    // 🧩 3️⃣ If all checks pass
+    const decoded = decodeToken(token);
+    if (decoded) {
+      localStorage.setItem("role", decoded.role);
+    }
+
+    if (role === "Admin" && userRole !== "Admin") {
+      router.replace("/dashboard");
+      return;
+    }
+
     setIsChecking(false);
   }, [router, role]);
 
@@ -58,11 +56,9 @@ export function ProtectedRoute({ children, role }: ProtectedRouteProps) {
       <Navbar />
       <div className="flex">
         <Sidebar />
-        <div className="w-full">
-          <main className="">{children}</main>
-          <Footer />
-        </div>
+        <main className="flex-1 p-6 bg-background">{children}</main>
       </div>
+      <Footer />
     </>
   );
 }

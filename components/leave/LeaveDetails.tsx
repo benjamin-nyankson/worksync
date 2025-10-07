@@ -1,21 +1,23 @@
 "use client";
 
 import { Leave, LeaveStatus } from "@/interface/interface";
-import { CalendarDays, User, Type, FileText, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/Button";
+import { CalendarDays, Clock, FileText, Type } from "lucide-react";
 import { useState } from "react";
+import { Button } from "../ui/Button";
 
 interface LeaveDetailsProps {
   leave: Leave | null;
   handleValidate: (id: string, status: LeaveStatus, message: string) => void;
   loading: boolean;
+  showValidate?: boolean;
 }
 
 export function LeaveDetails({
   leave,
   handleValidate,
   loading,
+  showValidate
 }: LeaveDetailsProps) {
   const [comment, setComment] = useState("");
   const [status, setStatus] = useState<LeaveStatus>("Pending");
@@ -39,26 +41,13 @@ export function LeaveDetails({
   };
   return (
     <div className="w-full max-w-lg mx-auto bg-background  rounded-2xl  space-y-5">
-      {/* Employee Info */}
-      <div className="flex items-center gap-3">
-        <div className="h-10 w-10 flex items-center justify-center rounded-full bg-primary/10 text-primary font-semibold uppercase">
-          {leave?.employeeName && leave?.employeeName.charAt(0)}
-        </div>
-        <div>
-          <p className="font-medium text-foreground">{leave.employeeName}</p>
-          <p className="text-sm text-foreground/60">{leave.userId}</p>
-        </div>
-      </div>
+      
 
-      <hr className="border-foreground/10" />
 
       {/* Leave Info */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
         <div className="flex items-center gap-2">
           <Type size={16} className="text-primary" />
-          <span>
-            <strong>Type:</strong> {leave.leaveType}
-          </span>
         </div>
 
         <div className="flex items-center gap-2">
@@ -79,21 +68,14 @@ export function LeaveDetails({
         <div className="flex items-center gap-2">
           <CalendarDays size={16} className="text-primary" />
           <span>
-            <strong>From:</strong> {leave.startDate}
+            <strong>From:</strong> {leave.start_date}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           <CalendarDays size={16} className="text-primary" />
           <span>
-            <strong>To:</strong> {leave.endDate}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Clock size={16} className="text-primary" />
-          <span>
-            <strong>No. of Days:</strong> {leave.noOfDays}
+            <strong>To:</strong> {leave.end_date}
           </span>
         </div>
       </div>
@@ -109,7 +91,7 @@ export function LeaveDetails({
           {leave.reason || "No reason provided"}
         </p>
       </div>
-      {leave.status === "Pending" && (
+      {leave.status === "Pending" && showValidate && (
         <>
           <div>
             <label className="block mb-1 font-medium">Admin Comment</label>

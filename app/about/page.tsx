@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { appName } from "@/constants/constant";
+import { APP_NAME } from "@/constants/constant";
 
 export default function AboutPage() {
   const containerVariants = {
@@ -65,8 +65,8 @@ export default function AboutPage() {
               className="text-4xl md:text-5xl font-bold leading-tight"
               variants={itemVariants}
             >
-              Building <span className="text-primary">{appName}</span> — A Better
-              Way to Manage Teams
+              Building <span className="text-primary">{APP_NAME}</span> — A
+              Better Way to Manage Teams
             </motion.h1>
             <motion.p
               className="text-foreground/70 max-w-2xl mx-auto text-lg"
@@ -101,7 +101,7 @@ export default function AboutPage() {
           <motion.div className="space-y-5" variants={itemVariants}>
             <h2 className="text-3xl font-bold mb-4">Our Story</h2>
             <p className="text-foreground/70 leading-relaxed">
-              {appName} was born out of a simple frustration — tracking leaves,
+              {APP_NAME} was born out of a simple frustration — tracking leaves,
               team schedules, and availability shouldn’t be this hard. We set
               out to create a system that simplifies workforce management
               without sacrificing flexibility or user experience.
@@ -131,10 +131,7 @@ export default function AboutPage() {
         </motion.div>
 
         {/* Mission & Values Section */}
-        <motion.div
-          className="bg-primary/5 py-20 px-6"
-          variants={itemVariants}
-        >
+        <motion.div className="bg-primary/5 py-20 px-6" variants={itemVariants}>
           <div className="max-w-6xl mx-auto text-center space-y-10">
             <h2 className="text-3xl font-bold">Our Mission & Values</h2>
             <p className="text-foreground/70 max-w-3xl mx-auto">
@@ -166,7 +163,9 @@ export default function AboutPage() {
                 {
                   icon: <Code className="h-6 w-6 text-primary" />,
                   title: "Built by Developers, for Teams",
-                  desc: appName + " is crafted by passionate engineers who understand the balance between logic and empathy.",
+                  desc:
+                    APP_NAME +
+                    " is crafted by passionate engineers who understand the balance between logic and empathy.",
                 },
                 {
                   icon: <Users className="h-6 w-6 text-primary" />,
@@ -200,10 +199,7 @@ export default function AboutPage() {
         </motion.div>
 
         {/* CTA Section */}
-        <motion.div
-          className="py-20 px-6 text-center"
-          variants={itemVariants}
-        >
+        <motion.div className="py-20 px-6 text-center" variants={itemVariants}>
           <div className="max-w-4xl mx-auto rounded-3xl bg-primary/1 py-16 px-6 md:px-12 shadow-sm">
             <h2 className="text-3xl font-bold mb-4">
               Join Us on Our Journey 🚀
@@ -211,7 +207,7 @@ export default function AboutPage() {
             <p className="text-foreground/70 max-w-2xl mx-auto mb-8">
               Whether you’re a company looking to simplify workforce management
               or a developer excited about building the future of work —
-              {appName} welcomes you.
+              {APP_NAME} welcomes you.
             </p>
             <div className="flex flex-col justify-center md:flex-row lg:flex-row gap-4">
               <Link href="/register">

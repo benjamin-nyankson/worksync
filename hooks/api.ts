@@ -3,10 +3,10 @@ import { fetcher } from "@/lib/fetcher";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 // === Queries ===
-export function useLeaves() {
+export function useLeaves(endpoint:"leaves/mine"|"leaves"="leaves/mine") {
   return useQuery<Leave[]>({
     queryKey: ["leaves"],
-    queryFn: () => fetcher<Leave[]>("/api/leaves"),
+    queryFn: () => fetcher<Leave[]>(endpoint),
     staleTime: 1000 * 60 * 5, 
   });
 }
@@ -25,7 +25,7 @@ export function useCreateLeave() {
 
   return useMutation({
     mutationFn: (newLeave: Omit<Leave, "id" | "status">) =>
-      fetcher<Leave>("/api/leaves", {
+      fetcher<Leave>("leaves", {
         method: "POST",
         body: JSON.stringify(newLeave),
         headers: { "Content-Type": "application/json" },

@@ -1,14 +1,14 @@
 "use client";
 
+import { Button } from "@/components/ui/Button";
+import { Leave } from "@/interface/interface";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { parseISO } from "date-fns";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/Button";
-import { differenceInDays, parseISO } from "date-fns";
-import { useEffect, useMemo } from "react";
 import { InputField } from "../ui/InputField";
-import { SelectField } from "../ui/SelectField";
-import { Leave } from "@/interface/interface";
+import { Textarea } from "../ui/TextArea";
 
 export function LeaveForm({
   onSubmit,
@@ -30,6 +30,7 @@ export function LeaveForm({
     handleSubmit,
     setValue,
     watch,
+    setError,
     formState: { errors },
   } = useForm<LeaveFormValues>({
     resolver: zodResolver(leaveSchema),
@@ -39,37 +40,21 @@ export function LeaveForm({
   const startDate = watch("startDate");
   const endDate = watch("endDate");
 
-  // Auto-calc number of days
   useEffect(() => {
     if (startDate && endDate) {
       const from = parseISO(startDate);
       const to = parseISO(endDate);
-      if (to >= from) {
-        const days = differenceInDays(to, from) + 1;
-        setValue("noOfDays", days);
+      if (to < from) {
+       setError("endDate", {message: "Enddate can't be before start date"});
       }
     }
   }, [startDate, endDate, setValue]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-md">
-      {/* Leave Type */}
-      <SelectField
-        label="Leave Type"
-        placeholder="Choose leave type"
-        value={watch("leaveType")}
-        onChange={(val) => setValue("leaveType", val)}
-        error={errors.leaveType?.message}
-        options={[
-          { value: "vacation", label: "Vacation" },
-          { value: "sick", label: "Sick" },
-          { value: "emergency", label: "Emergency" },
-        ]}
-      />
-
-      {/* Dates */}
+      
       <InputField
-        label="From"
+        label="Start Date"
         type="date"
         {...register("startDate")}
         className="w-full border rounded px-3 py-2"
@@ -77,27 +62,18 @@ export function LeaveForm({
       />
 
       <InputField
-        label="To"
+        label="End Date"
         type="date"
         {...register("endDate")}
         className="w-full border rounded px-3 py-2"
         error={errors.endDate && errors.endDate.message}
       />
 
-      {/* No. of Days */}
-      <InputField
-        label="No. of Days"
-        type="number"
-        {...register("noOfDays", { valueAsNumber: true })}
-        className="w-full border rounded px-3 py-2 bg-gray-100"
-        readOnly
-        error={errors.noOfDays && errors.noOfDays.message}
-      />
+      
 
-      {/* Reason */}
       <div>
         <label className="block mb-1 font-medium">Reason</label>
-        <textarea
+        <Textarea
           {...register("reason")}
           rows={3}
           className="w-full border rounded px-3 py-2"
@@ -124,20 +100,16 @@ const initialValues: Leave = {
   id: "",
   userId: "",
   employeeName: "",
-  leaveType: "",
   startDate: "",
   endDate: "",
   status: "Pending",
-  noOfDays: 0,
   reason: "",
 };
 
 const leaveSchema = z
   .object({
-    leaveType: z.string().min(1, "Leave type is required"),
     startDate: z.string().min(1, "Start date is required"),
     endDate: z.string().min(1, "End date is required"),
-    noOfDays: z.number().min(1, "Number of days must be at least 1"),
     reason: z.string().min(5, "Reason must be at least 5 characters"),
     id:z.string(),
     userId:z.string()

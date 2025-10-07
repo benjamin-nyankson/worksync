@@ -22,7 +22,7 @@ const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), {
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { appName } from "@/constants/constant";
+import { APP_NAME } from "@/constants/constant";
 
 // Custom marker icon (fixes broken default icons in Next.js)
 const icon = L.icon({
@@ -39,7 +39,7 @@ interface MapProps {
 }
 
 export function Map({
-  locations = [{ lat: 5.6037, lng: -0.187, label: appName + " HQ" }],
+  locations = [{ lat: 5.6037, lng: -0.187, label: APP_NAME + " HQ" }],
 }: MapProps) {
   const [isClient, setIsClient] = useState(false);
 
@@ -66,7 +66,7 @@ export function Map({
         />
         {locations.map((loc, index) => (
           <Marker key={index} position={[loc.lat, loc.lng]} icon={icon}>
-            <Popup>{loc.label ??  appName + " Office"}</Popup>
+            <Popup>{loc.label ?? APP_NAME + " Office"}</Popup>
           </Marker>
         ))}
       </MapContainer>
