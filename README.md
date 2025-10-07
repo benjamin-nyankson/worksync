@@ -1,6 +1,6 @@
-# 🕒 TimeEase
+# 🕒 WorkSynce
 
-**TimeEase** is a modern, intuitive **Leave & Workforce Management System** built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**.  
+**WorkSynce** is a modern, intuitive **Leave & Workforce Management System** built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**.  
 It helps teams manage time-off requests, approvals, and scheduling effortlessly — bringing balance and clarity to every workplace.
 
 ---
@@ -38,7 +38,7 @@ It helps teams manage time-off requests, approvals, and scheduling effortlessly 
 ## 🧩 Folder Structure
 
 ```
-timeease/
+worksynce/
 ├── app/
 │   ├── (public)/         # Unprotected routes (Landing, About, Contact, Pricing, Features)
 │   ├── (auth)/           # Auth routes (Login, Register)
@@ -68,8 +68,8 @@ timeease/
 
 ### 1️⃣ Clone the repo
 ```bash
-git clone https://github.com/yourusername/timeease.git
-cd timeease
+git clone https://github.com/yourusername/worksynce.git
+cd worksynce
 ```
 
 ### 2️⃣ Install dependencies
@@ -116,7 +116,7 @@ Then open [http://localhost:3000](http://localhost:3000) 🚀
 | `/login` / `/register` | Auth pages with form validation |
 | `/dashboard` | Employee dashboard with leave history & requests |
 | `/admin` | Admin dashboard with approvals & analytics |
-| `/features` | Highlight of TimeEase capabilities |
+| `/features` | Highlight of worksynce capabilities |
 | `/pricing` | Transparent, flexible pricing plans |
 | `/about` | Company story, mission, and values |
 | `/contact` | Contact form with map & Sonner alerts |
@@ -175,4 +175,4 @@ You’re free to use, modify, and distribute it with attribution.
 
 ---
 
-### ✨ “TimeEase — making time management effortless.”
+### ✨ “WorkSynce — making time management effortless.”
