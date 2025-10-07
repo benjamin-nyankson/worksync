@@ -4,6 +4,7 @@
 It helps teams manage time-off requests, approvals, and scheduling effortlessly — bringing balance and clarity to every workplace.
 
 ---
+**Live Demo:** [https://worksync-lilac.vercel.app](https://worksync-lilac.vercel.app)
 
 ## 🚀 Features
 
