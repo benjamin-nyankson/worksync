@@ -3,6 +3,7 @@
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { CalendarView } from "@/components/CalendarView";
 import { LeaveDetails } from "@/components/leave/LeaveDetails";
+import { Statistics } from "@/components/Statistics";
 import { Loader } from "@/components/ui/Loader";
 import { Modal } from "@/components/ui/Modal";
 import { useLeaves, useValidateLeave } from "@/hooks/api";
@@ -10,7 +11,6 @@ import { Leave, LeaveStatus } from "@/interface/interface";
 import { EventSourceInput } from "@fullcalendar/core";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-import { StatsCard } from "../dashboard/page";
 
 export default function AdminPage() {
   const { data: leaves, isFetching: loading } = useLeaves();
@@ -23,10 +23,11 @@ export default function AdminPage() {
     setOpen(true);
   };
 
-  const total = leaves?.length;
-  const approved = leaves?.filter((l) => l.status === "Approved").length;
-  const pending = leaves?.filter((l) => l.status === "Pending").length;
-  const rejected = leaves?.filter((l) => l.status === "Rejected").length;
+  const totalLeaves = leaves?.length ?? 0;
+  const approved = leaves?.filter((l) => l.status === "Approved").length ??0;
+  const pending = leaves?.filter((l) => l.status === "Pending").length ??0;
+  const rejected = leaves?.filter((l) => l.status === "Rejected").length ??0;
+  const stats = { totalLeaves, approved, pending, rejected };
 
   const { events } = useLeaveEvent(leaves || []);
 
@@ -56,24 +57,7 @@ export default function AdminPage() {
         </header>
 
         {/* Stats */}
-        <section className="grid grid-cols-1 sm:grid-cols-4 gap-6">
-          <StatsCard>
-            <h3 className="text-sm text-foreground/70">Total Requests</h3>
-            <p className="text-2xl font-bold text-primary">{total}</p>
-          </StatsCard>
-          <StatsCard>
-            <h3 className="text-sm text-foreground/70">Approved</h3>
-            <p className="text-2xl font-bold text-green-600">{approved}</p>
-          </StatsCard>
-          <StatsCard>
-            <h3 className="text-sm text-foreground/70">Pending</h3>
-            <p className="text-2xl font-bold text-yellow-500">{pending}</p>
-          </StatsCard>
-          <StatsCard>
-            <h3 className="text-sm text-foreground/70">Rejected</h3>
-            <p className="text-2xl font-bold text-red-500">{rejected}</p>
-          </StatsCard>
-        </section>
+        <Statistics {...stats} />
 
         {/* Data Table */}
         <section>

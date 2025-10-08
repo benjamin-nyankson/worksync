@@ -16,6 +16,7 @@ import { CalendarView } from "@/components/CalendarView";
 import { EventSourceInput } from "@fullcalendar/core";
 import { Tabs } from "@/components/ui/Tabs";
 import { ReactNode } from "react";
+import { Statistics } from "@/components/Statistics";
 
 type ModalState = {
   type: "none" | "create" | "update" | "view";
@@ -45,6 +46,8 @@ export default function DashboardPage() {
   const totalLeaves = leaves.length;
   const approved = leaves.filter((l) => l.status === "Approved").length;
   const pending = leaves.filter((l) => l.status === "Pending").length;
+  const rejected = leaves.filter((l) => l.status === "Rejected").length;
+  const stats = { totalLeaves, approved, pending, rejected };
 
   const handleLeaveSubmit = (leave: Leave) => {
     const user = JSON.parse(localStorage.getItem("user_data") ?? "{}") as User;
@@ -106,21 +109,7 @@ export default function DashboardPage() {
           </p>
         </section>
 
-        {/* Stats */}
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <StatsCard>
-            <h3 className="text-sm text-foreground/70">Total Leaves</h3>
-            <p className="text-2xl font-bold text-primary">{totalLeaves}</p>
-          </StatsCard>
-          <StatsCard>
-            <h3 className="text-sm text-foreground/70">Approved</h3>
-            <p className="text-2xl font-bold text-green-600">{approved}</p>
-          </StatsCard>
-          <StatsCard>
-            <h3 className="text-sm text-foreground/70">Pending</h3>
-            <p className="text-2xl font-bold text-yellow-500">{pending}</p>
-          </StatsCard>
-        </section>
+        <Statistics {...stats} />
 
         {/* Leaves Section */}
         <section>
