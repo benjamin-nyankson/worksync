@@ -91,7 +91,7 @@ export default function FeaturesPage() {
 
   return (
     <UnprotectedLayout>
-      <section className="bg-background text-foreground min-h-screen py-20 px-6">
+      <section className="bg-background text-foreground min-h-screen py-20 px-6 bg-custom-gradient">
         {/* Hero Section */}
         <motion.div
           className="max-w-5xl mx-auto text-center mb-20"
@@ -124,9 +124,8 @@ export default function FeaturesPage() {
         <motion.div
           className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+           initial="hidden"
+          animate="visible"
         >
           {features.map((feature, index) => (
             <motion.div

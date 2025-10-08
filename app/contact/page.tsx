@@ -54,7 +54,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center py-20 px-6 bg-gradient-to-b from-primary/10 via-background to-background"
+          className="text-center py-20 px-6 bg-custom-gradient"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Get in Touch with <span className="text-primary">{APP_NAME}</span>

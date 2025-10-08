@@ -50,7 +50,7 @@ export default function AboutPage() {
   return (
     <UnprotectedLayout>
       <motion.section
-        className="min-h-screen bg-background text-foreground"
+        className="min-h-screen bg-custom-gradient text-foreground"
         initial="hidden"
         animate="visible"
         variants={containerVariants}

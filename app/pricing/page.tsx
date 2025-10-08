@@ -81,13 +81,16 @@ export default function PricingPage() {
   return (
     <UnprotectedLayout>
       <motion.section
-        className="min-h-screen bg-background text-foreground py-20 px-6 "
+        className="min-h-screen bg-custom-gradient text-foreground py-20 px-6 "
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
         <div className="max-w-6xl mx-auto text-center mb-16">
-          <motion.h1 className="text-4xl font-bold mb-3" variants={itemVariants}>
+          <motion.h1
+            className="text-4xl font-bold mb-3"
+            variants={itemVariants}
+          >
             Simple, Transparent Pricing
           </motion.h1>
           <motion.p
@@ -109,8 +112,8 @@ export default function PricingPage() {
               key={plan.name}
               className={`relative flex flex-col justify-between rounded-2xl border border-foreground/10 p-8 shadow-md hover:shadow-lg transition-all ${
                 plan.highlighted
-                  ? 'bg-primary text-background scale-[1.02]'
-                  : 'bg-background text-foreground'
+                  ? "bg-primary text-background scale-[1.02]"
+                  : "bg-background text-foreground"
               }`}
               variants={cardVariants}
               custom={index}
@@ -125,14 +128,14 @@ export default function PricingPage() {
               <div>
                 <h2
                   className={`text-2xl font-bold mb-2 ${
-                    plan.highlighted ? 'text-background' : 'text-primary'
+                    plan.highlighted ? "text-background" : "text-primary"
                   }`}
                 >
                   {plan.name}
                 </h2>
                 <p
                   className={`text-3xl font-semibold mb-2 ${
-                    plan.highlighted ? 'text-background' : 'text-foreground'
+                    plan.highlighted ? "text-background" : "text-foreground"
                   }`}
                 >
                   {plan.price}
@@ -140,8 +143,8 @@ export default function PricingPage() {
                 <p
                   className={`text-sm mb-6 ${
                     plan.highlighted
-                      ? 'text-background/90'
-                      : 'text-foreground/70'
+                      ? "text-background/90"
+                      : "text-foreground/70"
                   }`}
                 >
                   {plan.description}
@@ -153,7 +156,7 @@ export default function PricingPage() {
                       <CheckCircle2
                         size={18}
                         className={
-                          plan.highlighted ? 'text-background' : 'text-primary'
+                          plan.highlighted ? "text-background" : "text-primary"
                         }
                       />
                       <span>{feature}</span>
@@ -164,11 +167,11 @@ export default function PricingPage() {
 
               <div className="mt-8">
                 <Button
-                  variant={plan.highlighted ? 'secondary' : 'primary'}
+                  variant={plan.highlighted ? "secondary" : "primary"}
                   size="md"
                   className="w-full"
                 >
-                  {plan.highlighted ? 'Get Started' : 'Choose Plan'}
+                  {plan.highlighted ? "Get Started" : "Choose Plan"}
                 </Button>
               </div>
             </motion.div>

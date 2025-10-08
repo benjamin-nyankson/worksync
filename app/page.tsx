@@ -45,7 +45,7 @@ export default function LandingPage() {
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 bg-custom-gradient">
         {/* Hero */}
         <motion.section
           className="flex flex-col items-center justify-center text-center py-20 px-6"
